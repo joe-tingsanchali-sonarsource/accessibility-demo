@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<!-- Web:S5254 — <html> element should have a language attribute (invalid ISO 639-1 code "xx") -->
+<html lang="xx">
+<head>
+  <meta charset="UTF-8">
+  <!-- Web:S7926 — Meta viewport tags should allow users to zoom -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <!-- Web:S6824 — No ARIA role or property for unsupported DOM elements (meta/title/head are not ARIA-compatible) -->
+  <meta name="description" content="Accessibility demo page" aria-hidden="true">
+  <title aria-label="Accessibility Issues Demo">Accessibility Issues Demo</title>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S7930 — HTML elements should have unique "id" attribute values
+  ════════════════════════════════════════════════════ -->
+  <div id="duplicate-id">First element</div>
+  <div id="duplicate-id">Second element (duplicate id)</div>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6841 — "tabIndex" values should be 0 or -1
+  ════════════════════════════════════════════════════ -->
+  <div tabindex="2">High tabindex value</div>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6821 — DOM elements with ARIA roles should have a valid non-abstract role
+  ════════════════════════════════════════════════════ -->
+  <div role="command">Abstract ARIA role "command"</div>
+  <div role="widget">Abstract ARIA role "widget"</div>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6793 — ARIA properties in DOM elements should have valid values
+  ════════════════════════════════════════════════════ -->
+  <span aria-hidden="ok">Invalid aria-hidden value (should be true/false)</span>
+  <span aria-checked="yes">Invalid aria-checked value</span>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6822 — No redundant ARIA role
+  ════════════════════════════════════════════════════ -->
+  <nav role="navigation">Redundant role on nav element</nav>
+  <button role="button">Redundant role on button</button>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6823 — DOM elements with the aria-activedescendant property should be accessible via the tab key
+  ════════════════════════════════════════════════════ -->
+  <div aria-activedescendant="item1">Listbox without tabindex</div>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6807 — DOM elements with ARIA roles should have the required properties
+  ════════════════════════════════════════════════════ -->
+  <div role="checkbox">Checkbox role without required aria-checked</div>
+  <div role="combobox">Combobox without required aria-expanded</div>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6811 — DOM elements with ARIA role should only have supported properties
+  ════════════════════════════════════════════════════ -->
+  <div role="img" aria-required="true">Image role with unsupported aria-required</div>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6819 — Prefer tag over ARIA role
+  ════════════════════════════════════════════════════ -->
+  <div role="heading" aria-level="1">Heading implemented as div (use h1 instead)</div>
+  <span role="checkbox" aria-checked="false">Checkbox as span (use input instead)</span>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6825 — Focusable elements should not have "aria-hidden" attribute
+  ════════════════════════════════════════════════════ -->
+  <a href="page.html" aria-hidden="true">Focusable link that is aria-hidden</a>
+  <button aria-hidden="true">Focusable button that is aria-hidden</button>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6827 — Anchors should contain accessible content
+  ════════════════════════════════════════════════════ -->
+  <a href="page.html"></a>
+  <a href="other.html">   </a>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6842 — Non-interactive DOM elements should not have interactive ARIA roles
+       Web:S6852 — Elements with an interactive role should support focus
+       (role=button with onclick handler but no tabindex = not focusable)
+  ════════════════════════════════════════════════════ -->
+  <span role="button" onclick="doAction()">Span with button role but no tabindex</span>
+  <p role="link" onclick="navigate()">Paragraph with link role but no tabindex</p>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6843 — Interactive DOM elements should not have non-interactive ARIA roles
+  ════════════════════════════════════════════════════ -->
+  <button role="presentation">Interactive button with non-interactive role</button>
+  <a href="page.html" role="none">Link with role=none</a>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6844 — Anchor tags should not be used as buttons
+  ════════════════════════════════════════════════════ -->
+  <a href="#" onclick="doAction()">Anchor used as a button</a>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6845 — Non-interactive DOM elements should not have the tabIndex property
+  ════════════════════════════════════════════════════ -->
+  <p tabindex="0">Paragraph with tabindex</p>
+  <article tabindex="0">Article with tabindex</article>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6846 — DOM elements should not use the "accesskey" property
+  ════════════════════════════════════════════════════ -->
+  <a href="page.html" accesskey="s">Skip navigation (accesskey)</a>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6847 — Non-interactive elements shouldn't have event handlers
+  ════════════════════════════════════════════════════ -->
+  <li onkeydown="handleKey()">List item with keyboard handler</li>
+  <span onkeypress="handleKey()">Span with keyboard event</span>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6848 — Non-interactive DOM elements should not have an interactive handler
+  ════════════════════════════════════════════════════ -->
+  <div onclick="doSomething()">Div with click handler</div>
+  <section onclick="doSomething()">Section with click handler</section>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:MouseEventWithoutKeyboardEquivalentCheck — Mouse events should have corresponding keyboard events
+  ════════════════════════════════════════════════════ -->
+  <div onmouseover="showTooltip()">Hover-only tooltip trigger (no keyboard equivalent)</div>
+  <div onmouseout="hideTooltip()">Mouse-out only handler</div>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6850 — Heading elements should have accessible content
+  ════════════════════════════════════════════════════ -->
+  <h1></h1>
+  <h2>   </h2>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6851 — Images should have a non-redundant alternate description
+  ════════════════════════════════════════════════════ -->
+  <p>Cat photo: <img src="cat.jpg" alt="Cat photo"></p>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6853 — Label elements should have a text label and an associated control
+  ════════════════════════════════════════════════════ -->
+  <label></label>
+  <label for="nonexistent-field-id">Orphaned label</label>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S7927 — Visible label text should be part of the accessible name
+  ════════════════════════════════════════════════════ -->
+  <button aria-label="Send email">Submit Order</button>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S7929 — Audio and video elements should not play automatically
+  ════════════════════════════════════════════════════ -->
+  <video autoplay src="intro.mp4"></video>
+  <audio autoplay controls>
+    <source src="background.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:FieldsetWithoutLegendCheck — <fieldset> tags should contain a <legend>
+  ════════════════════════════════════════════════════ -->
+  <form>
+    <fieldset>
+      <input type="text" name="first-name" id="first-name">
+      <input type="text" name="last-name" id="last-name">
+    </fieldset>
+  </form>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:FrameWithoutTitleCheck — <frames> should have a "title" attribute
+  ════════════════════════════════════════════════════ -->
+  <iframe src="widget.html"></iframe>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:ImgWithoutAltCheck — Image, area and button with image elements should have an "alt" attribute
+  ════════════════════════════════════════════════════ -->
+  <img src="photo.jpg">
+  <input type="image" src="submit.png">
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:InputWithoutLabelCheck — "input", "select" and "textarea" tags should be labeled
+  ════════════════════════════════════════════════════ -->
+  <form>
+    <input type="text" name="username" id="username-field">
+    <select name="country" id="country-field">
+      <option value="us">United States</option>
+      <option value="ca">Canada</option>
+    </select>
+    <textarea name="bio" id="bio-field"></textarea>
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:LinksIdenticalTextsDifferentTargetsCheck — Links with identical texts should have identical targets
+  ════════════════════════════════════════════════════ -->
+  <p>Read our articles:</p>
+  <a href="article-one.html">Read more</a>
+  <a href="article-two.html">Read more</a>
+  <a href="article-three.html">Read more</a>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:LinkToImageCheck — Links should not directly target images
+  ════════════════════════════════════════════════════ -->
+  <a href="photo.jpg">View full photo</a>
+  <a href="banner.png">See our banner</a>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:NonConsecutiveHeadingCheck — Heading tags should be used consecutively from "H1" to "H6"
+  ════════════════════════════════════════════════════ -->
+  <h1>Page Title</h1>
+  <h3>Sub-section (skipped H2)</h3>
+  <h5>Sub-sub-sub-section (skipped H4)</h5>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S4084 — Videos should have subtitles
+  ════════════════════════════════════════════════════ -->
+  <video controls>
+    <source src="lecture.mp4" type="video/mp4">
+  </video>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S5255 — "aria-label" or "aria-labelledby" attributes should be used to differentiate similar elements
+  ════════════════════════════════════════════════════ -->
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+  </nav>
+  <nav>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </nav>
+  <aside>Sidebar content A</aside>
+  <aside>Sidebar content B</aside>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S5256 — Tables should have headers
+       Web:TableWithoutCaptionCheck — <table> tags should have a description
+  ════════════════════════════════════════════════════ -->
+  <table>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>30</td>
+      </tr>
+      <tr>
+        <td>Jane</td>
+        <td>Smith</td>
+        <td>25</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:TableHeaderHasIdOrScopeCheck — <th> tags should have "id" or "scope" attributes
+       Web:S5260 — Table cells should reference their headers (wrong headers attribute values)
+  ════════════════════════════════════════════════════ -->
+  <table>
+    <caption>Employee Directory</caption>
+    <thead>
+      <tr>
+        <!-- th elements WITHOUT id or scope attribute -->
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Department</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <!-- td headers attribute references non-existent header IDs -->
+        <td headers="col-city col-unknown">Alice</td>
+        <td headers="col-zip col-unknown">Brown</td>
+        <td headers="col-country col-unknown">Engineering</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S5257 — HTML "<table>" should not be used for layout purposes
+  ════════════════════════════════════════════════════ -->
+  <table role="presentation">
+    <tr>
+      <td>Logo area</td>
+      <td>Navigation area</td>
+      <td>Search area</td>
+    </tr>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S5258 — Tables used for layout should not include semantic markup
+  ════════════════════════════════════════════════════ -->
+  <table role="presentation" summary="Page layout table">
+    <caption>Layout table caption</caption>
+    <tr>
+      <th>Column header in layout table</th>
+      <td>Content cell</td>
+    </tr>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S5264 — "<object>" tags should provide an alternative content
+  ════════════════════════════════════════════════════ -->
+  <object data="animation.swf" type="application/x-shockwave-flash" width="300" height="200">
+  </object>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:WmodeIsWindowCheck — Flash animations should be embedded using the window mode
+  ════════════════════════════════════════════════════ -->
+  <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="400" height="300">
+    <param name="movie" value="flash-banner.swf">
+    <param name="wmode" value="direct">
+  </object>
+
+  <embed src="flash-movie.swf"
+         width="550"
+         height="400"
+         wmode="transparent"
+         type="application/x-shockwave-flash"
+         pluginspage="http://www.macromedia.com/go/getflashplayer">
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:ServerSideImageMapsCheck — Server-side image maps ("ismap" attribute) should not be used
+  ════════════════════════════════════════════════════ -->
+  <a href="click_on_world_map.php" target="_self">
+    <img src="world_map.png" ismap alt="World map">
+  </a>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S6840 — DOM elements should use the "autocomplete" attribute correctly
+  ════════════════════════════════════════════════════ -->
+  <form>
+    <label for="ac-name">Full Name</label>
+    <input type="text" id="ac-name" name="fullname" autocomplete="full-name-invalid">
+    <label for="ac-email">Email</label>
+    <input type="email" id="ac-email" name="email" autocomplete="email-address-wrong">
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- ═══════════════════════════════════════════════════
+       Web:S7929 — Audio and video elements should not play automatically
+  ════════════════════════════════════════════════════ -->
+  <video autoplay src="welcome.mp4"></video>
+  <audio autoplay controls>
+    <source src="background.mp3" type="audio/mpeg">
+  </audio>
+
+</body>
+</html>

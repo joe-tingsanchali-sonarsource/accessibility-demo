@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Missing Rules Test</title>
+</head>
+<body>
+
+  <!-- Web:FieldsetWithoutLegendCheck — exact noncompliant example from rule docs -->
+  <fieldset>
+    Street: <input type="text"><br>
+    Town: <input type="text"><br>
+  </fieldset>
+
+  <!-- Web:InputWithoutLabelCheck — unlabeled inputs -->
+  <input type="text" name="username">
+  <select name="country">
+    <option value="us">United States</option>
+  </select>
+  <textarea name="comments"></textarea>
+
+  <!-- Web:LinksIdenticalTextsDifferentTargetsCheck — exact noncompliant example -->
+  <a href="a.html">qux</a>
+  <a href="b.html">qux</a>
+
+  <a href="c.html">foo</a>
+  <a href="d.html">foo</a>
+
+  <!-- Web:LinkToImageCheck — link directly to image -->
+  <a href="image.png">click here</a>
+  <a href="photo.jpg">view photo</a>
+
+  <!-- Web:NonConsecutiveHeadingCheck — h2 without h1 first -->
+  <h2>My Title</h2>
+  <h3>My Sub Title</h3>
+
+  <!-- Web:S7929 — autoplay audio/video -->
+  <video autoplay src="welcome.mp4"></video>
+  <audio autoplay controls>
+    <source src="background.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Web:ServerSideImageMapsCheck — exact noncompliant example -->
+  <a href="click_on_world_map.php" target="_self">
+    <img src="world_map.png" ismap alt="World map">
+  </a>
+
+  <!-- Web:TableHeaderHasIdOrScopeCheck — th used as row header without scope attribute -->
+  <table border="1">
+    <caption>Patient Appointments</caption>
+    <tbody>
+      <tr>
+        <th>Alice Johnson</th>
+        <td>Female</td>
+        <td>28</td>
+        <td>2026-03-15</td>
+        <td>alice@example.com</td>
+      </tr>
+      <tr>
+        <th>Bob Smith</th>
+        <td>Male</td>
+        <td>35</td>
+        <td>2026-03-16</td>
+        <td>bob@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table border="1">
+    <tr>
+      <th>Full Name</th>
+      <td>Alice Brown</td>
+    </tr>
+    <tr>
+      <th>Age</th>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>alice@example.com</td>
+    </tr>
+  </table>
+
+  <!-- Web:TableWithoutCaptionCheck — table without caption/description -->
+  <table>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+    </tr>
+    <tr>
+      <td>Bob</td>
+      <td>35</td>
+    </tr>
+  </table>
+
+  <!-- Web:WmodeIsWindowCheck — exact noncompliant examples -->
+  <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="550" height="400">
+    <param name="movie" value="movie_name.swf">
+    <param name="wmode" value="direct">
+  </object>
+
+  <embed src="movie_name.swf"
+         width="550"
+         height="400"
+         wmode="direct"
+         type="application/x-shockwave-flash"
+         pluginspage="http://www.macromedia.com/go/getflashplayer">
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+# SonarQube scanner working directory
+.scannerwork/
+
+# Node.js
+node_modules/
+
+# macOS
+.DS_Store

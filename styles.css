@@ -1,0 +1,54 @@
+/* Accessibility Issues Demo — CSS */
+
+/* ═══════════════════════════════════════════════════
+   css:S7924 — Text and background colors should have sufficient contrast
+   Contrast ratio for #aaaaaa on #ffffff is ~2.32:1 (fails WCAG AA requirement of 4.5:1)
+════════════════════════════════════════════════════ */
+.low-contrast-text {
+  color: #aaaaaa;
+  background-color: #ffffff;
+}
+
+.very-low-contrast {
+  color: #cccccc;
+  background-color: #eeeeee;
+}
+
+.bad-contrast-inverted {
+  color: #ffffff;
+  background-color: #dddddd;
+}
+
+/* ═══════════════════════════════════════════════════
+   css:S7925 — Text spacing properties should not use "!important" in style attributes
+   Overriding text spacing with !important prevents users from applying custom stylesheets
+   for accessibility needs (e.g. dyslexia fonts, increased line spacing).
+════════════════════════════════════════════════════ */
+.tight-text-spacing {
+  letter-spacing: 0 !important;
+  word-spacing: 0 !important;
+  line-height: 1 !important;
+}
+
+.compact-layout {
+  line-height: 1.1 !important;
+  letter-spacing: -0.05em !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   css:S7923 — CSS should not restrict page orientation using transform properties
+   Rotating the body in portrait mode forces users into landscape-only view,
+   blocking those who cannot rotate their devices.
+════════════════════════════════════════════════════ */
+@media screen and (orientation: portrait) {
+  body {
+    transform: rotate(90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}
